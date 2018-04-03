@@ -10,8 +10,13 @@ const UserSchema = new Schema({
   email: { type: String, unique: true, lowercase: true},
   password: String,
   username: { type: String, unique: true, lowercase: true},
+  about: String,
   picture: String,
+  subscribed: [{ type: Schema.Types.ObjectId, ref: 'SubReddit'}],
+  upvotes: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+  downvotes: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   created: { type: Date, default: Date.now },
+
 });
 
 UserSchema.pre('save', function(next) {
